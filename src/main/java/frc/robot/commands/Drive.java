@@ -23,11 +23,6 @@ public class Drive extends CommandBase {
     tDriveBase = drivebase;
   }
 
-  private ShuffleboardTab tab = Shuffleboard.getTab("mainTab");
-  private NetworkTableEntry fullSpeed = tab.add("fullSpeed", false)
-      .withWidget(BuiltInWidgets.kToggleButton)
-      .getEntry();
-
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
@@ -36,20 +31,11 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double joyValueL = RobotContainer.m_joystick.getRawAxis(1);
-    double joyValueR = RobotContainer.m_joystick.getRawAxis(5);
-    if (fullSpeed.getBoolean(true)) {
-      tDriveBase.move(ControlMode.PercentOutput, -joyValueL, -joyValueR);
-    } else {
-      tDriveBase.move(ControlMode.PercentOutput, -joyValueL * 0.5, -joyValueR * 0.5);
-    }
-    // tDriveBase.move(ControlMode.PercentOutput, -joyValueL, -joyValueR);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    tDriveBase.move(ControlMode.PercentOutput, 0, 0);
   }
 
   // Returns true when the command should end.
